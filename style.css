@@ -1,0 +1,232 @@
+/*   
+Theme Name: Post-it Timeline
+Theme URI: 
+Description: WordPress posts as a timeline of post-it notes
+Author: Mushon Zer-Aviv
+Author URI: http://mushon.com/
+Template: twentyeleven
+Version: 1.0
+Tags: Timeline, notes
+*/
+
+
+/* Import and disable Timeline styles
+-------------------------------------------------- */
+
+
+/* Import default styles from the Timeline theme: */
+@import url('../twentyeleven/style.css');
+
+
+/* Hide stuff
+------------------------- */
+/*hide major elements*/
+#access,
+#branding,
+footer#colophon,
+#footer-logo,
+#site-generator
+{
+  display: none !important;
+}
+
+
+/*hide post elements*/
+.corner-left,
+.corner-right,
+
+.author-info,
+div.box footer
+{
+  display: none
+}
+
+.timeline-separator{
+  background: none;
+}
+
+
+/* General Styles
+-------------------------------------------------- */
+
+body{
+  background: url(assets/concrete_wall_2.png) center 0;
+  /* background: url(assets/wood_pattern.png); */
+  font-size: 16px;
+}
+
+#page{
+  background: none;
+  max-width: 980px;
+}
+
+p{
+  font-size: 16px;
+}
+
+#primary{
+  margin: 0;
+}
+
+/* Typography
+------------------------- */
+
+
+/* Post
+-------------------------------------------------- */
+
+
+.content{
+  margin: 0;
+  width: auto;
+  text-align: center;
+}
+
+/* @import url(http://fonts.googleapis.com/css?family=Handlee); */
+
+div.box{
+  /* background: url(assets/note-yellow.png); */
+  border: none;
+  list-style: none;
+  height: 150px;
+  width: 180px;
+  background: none;
+  display: inline-block;
+  margin: 0 auto 20px;
+  
+  /* Sticky */
+  position: relative;
+  
+  font-family: 'Handlee', Chalkboard, sans-serif;
+  
+  /* margin-bottom: -360px; */
+}
+
+div.box .entry-meta,
+div.box .comments-link,
+div.box .entry-content{
+  display: none;
+}
+
+div.box:last-child{
+  margin-bottom: 20px !important;
+}
+
+h2.the-year,
+.hentry:after {
+  display: block;
+  content: "";
+  position: absolute; 
+  width: 60px;
+  height: 20px;
+  top: -14px;
+  left: 36%;    
+  border: 1px solid rgba(254, 254, 254, .3);
+  background: rgba(254, 254, 254, .6);
+  -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0 3px rgba(0,0,0,0.1);
+  box-shadow: 0px 0 3px rgba(0,0,0,0.1);  
+}
+
+h2.the-year{
+  text-align: center;
+  padding: 0 10px 20px;
+  text-transform: capitalize;
+  font-size: 30px;
+  font-family: 'Permanent Marker','Handlee', Chalkboard, sans-serif;
+  position: relative;
+  width: 100px;
+  top:auto;
+  left: auto;
+  margin: 0 auto 30px;
+  height: 30px;
+}
+
+article{
+  background-color: #37a9f2;
+  border-color: #DEE184;
+  -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
+     -moz-box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
+          box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
+  
+  height: 140px;
+  width: 160px;
+  text-align: center;
+
+}
+
+article.category-actors{
+  background: rgb(177, 234, 0);
+}
+
+article.category-events{
+  background: rgb(249, 82, 0);
+}
+
+article.category-ideas{
+  background: #F4F39E;
+}
+
+article h1.entry-title {
+  text-align: center;
+  padding: 5px;
+  font-family: 'Permanent Marker','Handlee', Chalkboard, sans-serif;
+  font-size: 23px;
+  overflow: hidden;
+}
+
+.entry-title, .entry-title a {
+  color: #000;
+}
+
+.entry-content, .entry-summary{
+  text-align: center;
+  padding: 1em;
+  overflow: hidden;
+  max-height: 355px;
+}
+
+/* Hover
+------------------ */
+
+div.box:hover{
+  z-index: 100;
+}
+
+div.box:hover article{
+  margin: 0 0 0 -150px;
+  width: 450px;
+  height: 450px;
+}
+
+div.box:hover .entry-content
+{
+  display: block
+}
+
+/* Isotope
+-------------------------------------------------- */
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+          transition-property: height, width;
+}
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+          transition-property:         transform, opacity;
+}
+.isotope-item {
+  z-index: 2;
+}
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
