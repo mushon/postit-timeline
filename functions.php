@@ -88,13 +88,19 @@ function intermittent_date_header( $d='', $before='', $after='', $echo = true, $
   global $idh_last_date_header;
   
   // Get the current date:
-  $date = substr(get_the_date( 'Y' ),0,-1) . "0";
+  $date = get_the_date( 'Y' );
+  
+  if($date<1800){
+    $date = substr($date,0,-2)+1 . "th century";
+  }else{
+    $date = substr($date,0,-1) . "0's";
+  }
   
   // Crop & Construct
   $date_header .= '<div class="content" id=' . $date . '>
-                     <h2 class="post the-year">' . 
-                     $date . "'s". 
-                     '</h2>';
+                     <h2 class="post the-year"><span>' . 
+                     $date . 
+                     '</span></h2>';
   
   // If it's the same, don't bother continuing
   if ( $date_header == $idh_last_date_header ) return;
