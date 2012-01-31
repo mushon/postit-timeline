@@ -194,19 +194,25 @@ article h1.entry-title {
 ------------------ */
 
 div.box:hover{
-  z-index: 100;
-  position: fixed;
-  top: 50%; left: 50%;
-  margin: -150px 0 0 -150px;
-  padding: 0 300px 300px 0;
+  z-index: 1000;
+  margin-top: -70px;
 }
 
 div.box:hover article{
-  width: 450px;
-  height: 450px;
-  -webkit-box-shadow: 0px 2px 280px rgba(0,0,0,0.75);
-     -moz-box-shadow: 0px 2px 280px rgba(0,0,0,0.75);
-          box-shadow: 0px 2px 280px rgba(0,0,0,0.75);
+  position: fixed;
+  top: 50%; left: 50%;
+  margin: -150px 0 0 -150px;
+  width: 450px;  height: 440px;  padding-top: 10px;
+  -webkit-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+     -moz-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+          box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+}
+
+div.box:hover article:after {
+  width: 180px;
+  height: 60px;
+  top: -45px;
+  left: 36%;
 }
 
 div.box:hover .entry-content
