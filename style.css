@@ -71,6 +71,10 @@ p{
 /* Typography
 ------------------------- */
 
+article.tag-sml h1.entry-title{
+  font-size: 19px;
+}
+
 
 /* Post
 -------------------------------------------------- */
@@ -190,14 +194,16 @@ article h1.entry-title {
   max-height: 355px;
 }
 
-/* Hover
+/* Hover / Expanded
 ------------------ */
 
+.page #content,
 div.box:hover{
   z-index: 1000;
   margin-top: -70px;
 }
 
+.singular #content article,
 div.box:hover article{
   position: fixed;
   top: 50%; left: 50%;
@@ -208,6 +214,7 @@ div.box:hover article{
           box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
 }
 
+.singular #content article:after,
 div.box:hover article:after {
   width: 180px;
   height: 60px;
@@ -215,9 +222,45 @@ div.box:hover article:after {
   left: 36%;
 }
 
+.singular #content .entry-content,
 div.box:hover .entry-content
 {
   display: block
+}
+
+.singular #content article{
+  position: relative;
+  margin: 30px auto;
+  top: auto; left: auto;
+  width: 600px; height: auto; 
+  overflow: visible;
+  min-height: 600px;
+}
+
+.singular #content .entry-content, 
+.singular #content .entry-summary{
+  height: auto;
+  overflow: visible;
+  max-height: none;
+}
+
+#comments{
+  display: none;
+}
+
+/* Input Forms using the WP User Frontend plugin
+http://wordpress.org/extend/plugins/wp-user-frontend
+-------------------------------------------------- */
+
+.wpuf-post-form input[name="jj"],
+.wpuf-post-form input[name="hh"],
+.wpuf-post-form input[name="mn"]
+{
+  display: none;
+}
+
+.wpuf-post-form {
+    text-align: left;
 }
 
 /* Isotope
