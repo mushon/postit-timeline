@@ -1,5 +1,6 @@
 <?php get_header(); ?>
-  <?php query_posts( 'posts_per_page=100' ); ?>
+
+  <?php query_posts( 'posts_per_page=1000' ); ?>
   <?php $sectionCount = 0 ?>
   <?php while (have_posts()) : the_post(); ?>
   <?php $media = get_post_meta($post->ID, 'image', true); ?>
@@ -15,6 +16,6 @@
     <?php $sectionCount++ ?>
   <?php endwhile; ?>
 </ul>
-
 <!-- #content -->
+
 <?php get_footer(); ?>

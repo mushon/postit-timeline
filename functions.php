@@ -4,8 +4,21 @@
 // usage: http://codex.wordpress.org/Template_Tags/the_date
 
 
+/* Add Arabella header & footer
+-------------------------------------------------------------- */
+
+
+function arabella_footer ($content){
+  echo '</div>
+  </div>
+    <iframe id="siteFooter" src="http://dev-arabella.thisisvisceral.com/static-footer/"></iframe>
+  <div>' . $content;
+}
+
+add_filter('get_footer','arabella_footer');
+
 /* Add to HEAD
--------------------------------------------------- */
+-------------------------------------------------------------- */
 
 
 function headjs(){
@@ -14,25 +27,13 @@ function headjs(){
   <!-- jQuery
   *************************************************** -->
   <script src="<?php bloginfo('wpurl') ?>/wp-includes/js/jquery/jquery.js" type="text/javascript"></script>
+  <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery.scrollTo.js" type="text/javascript"></script>
+  <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery.localscroll.js" type="text/javascript"></script>
   
 
   <script type="text/javascript">
 
   jQuery(document).ready(function(){
-  
-  
-  /* count posts
-  ***************************************************/
-/*
-    jQuery(".content").each(function() {
-      var unit = jQuery(this).children(":first").width;
-      var count = jQuery(this).children().length;
-      var max = unit * count + 'px';
-      //if (max < jQuery('#main').width){
-        jQuery(this).css({'width': max});
-      //}
-    });
-*/
 
   /* Randomize
   ***************************************************/
@@ -53,24 +54,22 @@ function headjs(){
     });
     
     
+/* One Page Nav
+  ***************************************************/
+  
+    jQuery('#page').append(jQuery('<ul id="nav"><li><h3>now</h3></li></ul>'));
+    
+    jQuery("div.content").each(function() {
+      var navItem = '<li><a href="#' + jQuery(this).attr("id") + '"><span>' + jQuery(this).attr("name") + '</span></a></li>';
+      jQuery('ul#nav').append(navItem);
+    });
+    
+    jQuery('ul#nav').append('<li><h3>then</h3></li>');
+    
+    jQuery('ul#nav').localScroll();
+    
   }); 
   </script>
-  
-  <!-- Isotope
-  *************************************************** -->
-  <!--
-  <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery.isotope.min.js" type="text/javascript"></script>
-
-  <script type='text/javascript'>
-    jQuery(document).ready(function() {
-      jQuery('.content').isotope({
-        // options
-        itemSelector : '.box',
-        layoutMode : 'masonry'
-      });
-    });
-  </script>
-  -->
   
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
@@ -97,11 +96,11 @@ function intermittent_date_header( $d='', $before='', $after='', $echo = true, $
   }
   
   // Crop & Construct
-  $date_header .= '<div class="content" id=' . $date . '>
+  $date_header .= '<div class="content" id=' . str_replace(array(" ", "'"), "", $date) . ' name="' . $date . '">
                      <h2 class="post the-year"><span>' . 
                      $date . 
                      '</span></h2>';
-  
+                     
   // If it's the same, don't bother continuing
   if ( $date_header == $idh_last_date_header ) return;
   
