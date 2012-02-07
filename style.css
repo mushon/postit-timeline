@@ -92,10 +92,6 @@ body{
   padding: 250px 0 300px;
 }
 
-p{
-  font-size: 16px;
-}
-
 #primary{
   margin: 0;
 }
@@ -140,8 +136,7 @@ div.box{
 }
 
 div.box .entry-meta,
-div.box .comments-link,
-div.box .entry-content{
+div.box .comments-link{
   display: none;
 }
 
@@ -194,7 +189,7 @@ article{
      -moz-box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
           box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
   
-  height: 140px;
+  height: 160px;
   width: 160px;
   text-align: center;
 
@@ -229,40 +224,8 @@ article h1.entry-title {
   padding: 1em;
   overflow: hidden;
   max-height: 355px;
-}
-
-/* Hover / Expanded
------------------- */
-
-.page #content,
-div.box:hover{
-  z-index: 1000;
-  margin-top: -70px;
-}
-
-.singular #content article,
-div.box:hover article{
-  position: fixed;
-  top: 50%; left: 50%;
-  margin: -150px 0 0 -150px;
-  width: 450px;  height: 440px;  padding-top: 10px;
-  -webkit-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
-     -moz-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
-          box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
-}
-
-.singular #content article:after,
-div.box:hover article:after {
-  width: 180px;
-  height: 60px;
-  top: -45px;
-  left: 36%;
-}
-
-.singular #content .entry-content,
-div.box:hover .entry-content
-{
-  display: block
+  display: none;
+  height: 100%;
 }
 
 .singular #content article{
@@ -382,4 +345,69 @@ ul#nav a:hover{
   border-bottom: none;
   background: url(assets/ruller.png) center left no-repeat;
   margin-bottom: -10px; 
+}
+
+/* Expanded / Focus on click:
+-------------------------------------------------- */
+
+.page #content,
+div.box.flip{
+  z-index: 1000;
+  margin-top: -70px;
+}
+
+.singular #content article,
+div.box.flip article{
+  position: fixed;
+  top: 50%; left: 50%;
+  margin: -150px 0 0 -150px;
+  width: 450px;  height: 440px;  padding-top: 10px;
+  -webkit-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+     -moz-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+          box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
+  
+  font-size: 16px;
+  overflow: hidden;
+}
+
+.singular #content article:after,
+div.box.flip article:after {
+  width: 180px;
+  height: 60px;
+  top: -45px;
+  left: 36%;
+}
+
+.singular #content .entry-content,
+div.box.flip .entry-content
+{
+  display: block;
+}
+
+.hentry {
+	margin: 0; padding: 0;
+	float: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 900;
+	
+  font-size: 8px;
+
+	/* -- transition is the magic sauce for animation -- */
+	-o-transition: all .3s ease-out;
+	-ms-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-webkit-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+	
+	cursor: pointer;
+}
+
+.hentry header{
+  min-height: 100%;
+}
+
+.flip .hentry header{
+  min-height: 0;
 }

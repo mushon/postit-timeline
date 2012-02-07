@@ -24,11 +24,19 @@ add_filter('get_footer','arabella_footer');
 function headjs(){
   ?>  
   
-  <!-- jQuery
+  <!-- jQuery + Plugins
   *************************************************** -->
   <script src="<?php bloginfo('wpurl') ?>/wp-includes/js/jquery/jquery.js" type="text/javascript"></script>
+  <!-- For the scroll -->
   <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery.scrollTo.js" type="text/javascript"></script>
   <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery.localscroll.js" type="text/javascript"></script>
+  <!-- For the focus -->
+  <script src="<?php bloginfo('stylesheet_directory') ?>/js/jquery-ui.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo('stylesheet_directory') ?>/js/jquery-ui.css" />
+  <!-- For the future -->
+  <script src="<?php bloginfo('stylesheet_directory') ?>/js/modernizr-2.js" type="text/javascript"></script>
+  
+  
   
 
   <script type="text/javascript">
@@ -68,7 +76,19 @@ function headjs(){
     
     jQuery('ul#nav').localScroll();
     
-  }); 
+
+/* Flip on click
+  ***************************************************/
+			
+			// set up click/tap panels
+			jQuery('.hentry').toggle(function(){
+				jQuery(this).parent().addClass('flip');
+			},function(){
+				jQuery(this).parent().removeClass('flip');
+			});
+			
+		});
+  
   </script>
   
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
