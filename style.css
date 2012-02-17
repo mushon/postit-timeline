@@ -29,21 +29,6 @@ footer#colophon,
   display: none !important;
 }
 
-
-/*hide post elements*/
-.corner-left,
-.corner-right,
-
-.author-info,
-div.box footer
-{
-  display: none
-}
-
-.timeline-separator{
-  background: none;
-}
-
 /* iFrames
 -------------------------------------------------- */
 iframe#siteHeader{
@@ -190,7 +175,6 @@ div.box{
   /* margin-bottom: -360px; */
 }
 
-div.box .entry-meta,
 div.box .comments-link{
   display: none;
 }
@@ -216,7 +200,7 @@ h2.the-year span,
   width: 60px;
   height: 20px;
   top: -14px;
-  left: 36%; 
+  left: 33%; 
 }
 
 h2.the-year span{
@@ -250,6 +234,47 @@ article{
 
 }
 
+.entry-meta a{
+  font-weight: normal;
+  text-decoration: none;
+  opacity: 0.7;
+  color: #222;
+  display: none;
+  padding: 4px 8px;
+}
+
+.flip:hover .entry-header .entry-meta{
+  top:0;
+}
+
+.box:hover .entry-meta a{
+  display: block;
+  font-size: 13px;
+}
+
+div.box footer.entry-meta{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.entry-header .entry-meta{
+  padding: 0;
+  width: 100%;  
+  position: absolute;
+  top: -15px;
+  z-index: 99999;
+}
+
+.entry-utility-prep,
+.sep,
+.comments-link,
+.edit-link,
+.author,
+.tag-links{
+  display: none;
+}
+
 article.category-actors{
   background: rgb(177, 234, 0);
 }
@@ -277,7 +302,7 @@ article h1.entry-title {
 }
 
 .entry-title, .entry-title a {
-  color: #000;
+  color: #222;
 }
 
 .entry-content, .entry-summary{
