@@ -4,14 +4,18 @@
 // usage: http://codex.wordpress.org/Template_Tags/the_date
 
 
-/* Add Arabella header & footer
+/* Add Arabella footer
 -------------------------------------------------------------- */
 
-
 function arabella_footer ($content){
+  
+  $page_data = get_page_by_path( 'add' );
+  $form = '<h2>' . apply_filters('the_content', $page_data->post_title) . '</h2>';  
+  $form .= apply_filters('the_content', $page_data->post_content);
   echo '</div>
   </div>
-    <iframe id="siteFooter" src="http://dev-arabella.thisisvisceral.com/static-footer/"></iframe>
+  <section id="add">' . $form . '</section>
+    <iframe id="siteFooter" src="http://www.arabellaadvisors.com/static-footer/"></iframe>
   <div>' . $content;
 }
 
@@ -65,7 +69,7 @@ function headjs(){
 /* One Page Nav
   ***************************************************/
   
-    jQuery('#page').append(jQuery('<ul id="nav"><li><h3>now</h3></li></ul>'));
+    jQuery('#page').append(jQuery('<ul id="nav" class="internal"><li><h3>now</h3></li></ul>'));
     
     jQuery("div.content").each(function() {
       var navItem = '<li><a href="#' + jQuery(this).attr("id") + '"><span>' + jQuery(this).attr("name") + '</span></a></li>';
@@ -74,21 +78,38 @@ function headjs(){
     
     jQuery('ul#nav').append('<li><h3>then</h3></li>');
     
-    jQuery('ul#nav').localScroll();
+    jQuery('.internal').localScroll();
     
 
 /* Flip on click
   ***************************************************/
 			
+			jQuery('body').append(jQuery('<div id="shade"></div>'));
+			
 			// set up click/tap panels
 			jQuery('.hentry').toggle(function(){
 				jQuery(this).parent().addClass('flip');
+				jQuery('body').addClass('flipped');
+				
+				
+				// set up click/tap panels
+  			jQuery('#shade').click(function(){
+  				jQuery('.flip').removeClass('flip');
+  				jQuery('body').removeClass('flipped');
+  			});
+  			
 			},function(){
 				jQuery(this).parent().removeClass('flip');
+				jQuery('body').removeClass('flipped');
 			});
 			
 		});
   
+  </script>
+  
+  <link rel="stylesheet" href="http://use.typekit.com/k/lft2tly-d.css?3bb2a6e53c9684ffdc9a9bf01f5b2a62dc1020e61a7e41334f5590cfa9cb5688e25e70b94b41ca58a824b5df6ba2cc0c3d7772edab072324bd83f861dfc769caca8b1e59a31d7fd90553e586cb2a606505a656e45793c5063b4719fccff0d9d73780587de8ea2e23c25a60b4c124ab36aeb484dc97400efa6c3acdd7055ce26978fcf85775c2ece7fd09422545a41356d747476d2ccc03693a1c97bac4a4d50dba9fed657d">
+  <script type="text/javascript">
+    try{Typekit.load();}catch(e){}
   </script>
   
   <link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>

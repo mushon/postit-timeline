@@ -22,7 +22,6 @@ Tags: Timeline, notes
 ------------------------- */
 /*hide major elements*/
 #access,
-#branding,
 footer#colophon,
 #footer-logo,
 #site-generator
@@ -48,9 +47,6 @@ div.box footer
 /* iFrames
 -------------------------------------------------- */
 iframe#siteHeader{
-  position: absolute;
-  top:0;
-  left: 0;
   height: 145px;
   width: 100%;
   overflow: hidden;
@@ -78,6 +74,16 @@ body{
   padding: 0;
 }
 
+body, input, textarea {
+    color: #373737;
+    font: 400 15px/1.625 "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 #page{
   background: none;
   width: 100%;
@@ -87,9 +93,9 @@ body{
 }
 
 #main{
-  max-width: 980px;
+  /* max-width: 980px; */
   margin: 0 auto;
-  padding: 250px 0 300px;
+  padding: 0 135px 100px;
 }
 
 #primary{
@@ -103,6 +109,55 @@ article.tag-sml h1.entry-title{
   font-size: 19px;
 }
 
+
+/* Header
+-------------------------------------------------- */
+
+#branding,
+#add{
+  max-width: 740px;
+  margin: 60px auto 10px;
+  padding: 50px 50px 40px;
+  text-align: center;
+  border-top: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  background: rgba(50,50,50,0.03);
+  color: #37241C;
+  z-index: 0;
+}
+
+#add{
+  margin-bottom: 100px;
+}
+
+#branding hgroup{
+  margin: 0;
+  padding: 0;
+}
+
+#site-title{
+  margin-right: 0;
+  padding: 0;
+}
+#site-title a,
+#add h2 {
+  color: #37241C;
+  font-family: brandon-grotesque-n5,brandon-grotesque,sans-serif;
+  font-size: 48px;
+  text-shadow: rgba(255,255,255,0.7) -1px -1px 0, rgba(100,100,100,0.5) 1px 1px 0;
+  font-style: normal;
+  font-weight: 500;
+}
+
+#site-title a:hover, #site-title a:focus, #site-title a:active {
+    color: #a73415;
+}
+
+#about{
+  margin: 20px 0 -10px;
+}
 
 /* Post
 -------------------------------------------------- */
@@ -215,6 +270,12 @@ article h1.entry-title {
   overflow: hidden;
 }
 
+.entry-title a:hover,
+.entry-title a:focus,
+.entry-title a:active {
+  color: inherit;
+}
+
 .entry-title, .entry-title a {
   color: #000;
 }
@@ -222,7 +283,7 @@ article h1.entry-title {
 .entry-content, .entry-summary{
   text-align: center;
   padding: 1em;
-  overflow: hidden;
+  overflow: auto;
   max-height: 355px;
   display: none;
   height: 100%;
@@ -248,24 +309,8 @@ article h1.entry-title {
   display: none;
 }
 
-/* Input Forms using the WP User Frontend plugin
-http://wordpress.org/extend/plugins/wp-user-frontend
--------------------------------------------------- */
-
-.wpuf-post-form input[name="jj"],
-.wpuf-post-form input[name="hh"],
-.wpuf-post-form input[name="mn"]
-{
-  display: none;
-}
-
-.wpuf-post-form {
-    text-align: left;
-}
-
-
-/* Input Forms using the WP User Frontend plugin
-http://wordpress.org/extend/plugins/wp-user-frontend
+/* Input Forms using the Form Manager
+http://www.campbellhoffman.com/form-manager/
 -------------------------------------------------- */
 
 form,
@@ -278,12 +323,20 @@ form,
   font-size: 25px;
 }
 
+.fm-form input{
+  margin: 0;
+}
+
 form.fm-form input.submit {
     display: block;
-    font-size: 20px;
-    margin: 0 auto 30px;
-    width: 50%;
     float: none;
+    font-size: 20px;
+    margin: 50px 0 30px 240px;
+    width: 60%;
+}
+
+form.fm-form textarea {
+    width: 440px;
 }
 
 /* Nav
@@ -350,6 +403,23 @@ ul#nav a:hover{
 /* Expanded / Focus on click:
 -------------------------------------------------- */
 
+#shade{
+  display: none;
+  z-index: 900;
+  position: fixed;
+  width:100%;
+  height: 100%;
+  cursor: pointer;
+  background: #222;
+  opacity: 0.6;
+  top:0; left: 0;
+  
+}
+
+.flipped #shade{
+  display: block;
+}
+
 .page #content,
 div.box.flip{
   z-index: 1000;
@@ -360,7 +430,7 @@ div.box.flip{
 div.box.flip article{
   position: fixed;
   top: 50%; left: 50%;
-  margin: -150px 0 0 -150px;
+  margin: -225px 0 0 -225px;
   width: 450px;  height: 440px;  padding-top: 10px;
   -webkit-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
      -moz-box-shadow: 0px 120px 280px rgba(0,0,0,0.75);
@@ -376,6 +446,10 @@ div.box.flip article:after {
   height: 60px;
   top: -45px;
   left: 36%;
+}
+
+div.box.flip article:after{
+  display: none;
 }
 
 .singular #content .entry-content,
@@ -410,4 +484,23 @@ div.box.flip .entry-content
 
 .flip .hentry header{
   min-height: 0;
+}
+
+/* Singular
+-------------------------------------------------- */
+
+.singular #content article{
+  position: relative;
+  left: auto; top: auto;
+  margin: 30px auto;
+  height: auto;   width: 550px;
+  overflow: visible;
+}
+
+.singular #content article header{
+  min-height: 0;
+}
+
+.singular #nav{
+  display: none;
 }
