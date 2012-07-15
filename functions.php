@@ -84,23 +84,29 @@ function headjs(){
 /* Flip on click
   ***************************************************/
 			
-			jQuery('body').append(jQuery('<div id="shade"></div>'));
+			jQuery('body.home').append(jQuery('<div id="shade"></div>'));
 			
 			// set up click/tap panels
-			jQuery('.hentry').toggle(function(){
+			jQuery('.box .post').toggle(function(){
+			  jQuery('.box').removeClass('top');
 				jQuery(this).parent().addClass('flip');
 				jQuery('body').addClass('flipped');
 				
-				
-				// set up click/tap panels
+				// set up shade interaction:
   			jQuery('#shade').click(function(){
-  				jQuery('.flip').removeClass('flip');
+  				jQuery('.flip').removeClass('flip').addClass('top');
   				jQuery('body').removeClass('flipped');
+  				jQuery('.top').addEventListener("transitionend", function(){
+    				jQuery('.top').removeClass('top');
+          }, true);
   			});
   			
 			},function(){
-				jQuery(this).parent().removeClass('flip');
+				jQuery(this).parent().removeClass('flip').addClass('top');
 				jQuery('body').removeClass('flipped');
+				jQuery('.top').addEventListener("transitionend", function(){
+  				jQuery('.top').removeClass('top');
+        }, true);
 			});
 			
 		});
