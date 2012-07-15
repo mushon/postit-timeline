@@ -70,15 +70,26 @@
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed">
 
-  <iframe id="siteHeader" src="http://www.arabellaadvisors.com/static-header/"></iframe>
+  <!-- <iframe id="siteHeader" src="#"></iframe> -->
+
+    <!--[if lt IE 8 ]>
+    <div class="ieWarning">
+     <p>This page has been optimized for Internet Explorer 8 and above. If you are having trouble seeing this page, please upgrade Internet Explorer here: <a href="http://windows.microsoft.com/en-us/internet-explorer/products/ie/home">http://windows.microsoft.com/en-us/internet-explorer/products/ie/home</a> or use another browser. </p>
+    </div>
+    <![endif]-->
+
+  <?php if (is_home()){?>
 
 	<header id="branding" role="banner">
 			<hgroup>
+			   <a href="http://ega.org" target="_blank" class="back">back to EGA.org</a>
+			   <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/assets/logo.png" alt="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> <?php bloginfo( 'description' ); ?>">
 				<h1 id="site-title"><span><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
-				<!-- <h2 id="site-description"><?php bloginfo( 'description' ); ?></h2> -->
+				<h2 id="site-description"><?php bloginfo( 'description' ); ?></h2>
 			</hgroup>
 			
 			<section id="about" class="internal">
+            
         <?php 
         $page_data = get_page_by_path( 'about' );
         $content = apply_filters('the_content', $page_data->post_content);
@@ -87,6 +98,8 @@
 			</section>
 			
 	</header><!-- #branding -->
-
+  <?php } else {?> 
+      <div class="label back"><a href="<?php echo esc_url( home_url( '/' ) ); ?>">back to timeline</a></div>
+  <?php } ?> 
 
 	<div id="main">

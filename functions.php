@@ -4,22 +4,35 @@
 // usage: http://codex.wordpress.org/Template_Tags/the_date
 
 
-/* Add Arabella footer
+/* Add postit footer
 -------------------------------------------------------------- */
 
-function arabella_footer ($content){
+function postit_footer ($content){
   
+/*
   $page_data = get_page_by_path( 'add' );
-  $form = '<h2>' . apply_filters('the_content', $page_data->post_title) . '</h2>';  
-  $form .= apply_filters('the_content', $page_data->post_content);
-  echo '</div>
+  if (is_home()){
+    $form = '<section id="add"';
+    //$form .= '><h2>' . apply_filters('the_content', $page_data->post_title) . '</h2>';  
+    //$form .= apply_filters('the_content', $page_data->post_content);
+    
+    $form .= echo do_shortcode('[form add]');
+    $form .= '</section>';
+  } else{
+    $form ='';
+  }
+*/
+  $footer = '</div>
   </div>
-  <section id="add">' . $form . '</section>
-    <iframe id="siteFooter" src="http://www.arabellaadvisors.com/static-footer/"></iframe>
-  <div>' . $content;
+    ';
+  //$footer .= $form;
+  $footer .= '<iframe id="siteFooter" src="#"></iframe>
+  <div>';
+  $footer .=$content;
+  //echo $footer;
 }
 
-add_filter('get_footer','arabella_footer');
+add_filter('get_footer','postit_footer');
 
 /* Add to HEAD
 -------------------------------------------------------------- */
@@ -66,17 +79,22 @@ function headjs(){
     });
     
     
-/* One Page Nav
+/* Single Page Nav
   ***************************************************/
+    <?php
+    $add = get_page_by_path( 'add' );
+    $id = $add->ID;
+    ?>
+    jQuery('body.singular #page').append(jQuery('<a class="submit" href="<?php bloginfo('siteurl') //the "home" page ?>">Back</a>'));
   
-    jQuery('#page').append(jQuery('<ul id="nav" class="internal"><li><h3>now</h3></li></ul>'));
+    jQuery('body.home #page').append(jQuery('<a class="submit" href="<?php bloginfo('siteurl') //the "home" page ?>/add">Submit</a> <ul id="nav" class="internal"><li><h3>2050</h3></li></ul>'));
     
     jQuery("div.content").each(function() {
       var navItem = '<li><a href="#' + jQuery(this).attr("id") + '"><span>' + jQuery(this).attr("name") + '</span></a></li>';
       jQuery('ul#nav').append(navItem);
     });
     
-    jQuery('ul#nav').append('<li><h3>then</h3></li>');
+    jQuery('ul#nav').append('<li><h3>1950</h3></li>');
     
     jQuery('.internal').localScroll();
     
@@ -84,23 +102,29 @@ function headjs(){
 /* Flip on click
   ***************************************************/
 			
-			jQuery('body').append(jQuery('<div id="shade"></div>'));
+			jQuery('body.home').append(jQuery('<div id="shade"></div>'));
 			
 			// set up click/tap panels
-			jQuery('.hentry').toggle(function(){
+			jQuery('.box .post').toggle(function(){
+			  jQuery('.box').removeClass('top');
 				jQuery(this).parent().addClass('flip');
 				jQuery('body').addClass('flipped');
 				
-				
-				// set up click/tap panels
+				// set up shade interaction:
   			jQuery('#shade').click(function(){
-  				jQuery('.flip').removeClass('flip');
+  				jQuery('.flip').removeClass('flip').addClass('top');
   				jQuery('body').removeClass('flipped');
+  				jQuery('.top').addEventListener("transitionend", function(){
+    				jQuery('.top').removeClass('top');
+          }, true);
   			});
   			
 			},function(){
-				jQuery(this).parent().removeClass('flip');
+				jQuery(this).parent().removeClass('flip').addClass('top');
 				jQuery('body').removeClass('flipped');
+				jQuery('.top').addEventListener("transitionend", function(){
+  				jQuery('.top').removeClass('top');
+        }, true);
 			});
 			
 		});
@@ -120,25 +144,29 @@ function headjs(){
 add_filter('wp_head','headjs');
 
 
-function intermittent_date_header( $d='', $before='', $after='', $echo = true, $sectionCount )
+function intermittent_date_header( $d='', $before='', $after='', $echo = true, $sectionCount, $year )
 {
   
   if($sectionCount > 0) $close = '</div>';
   
   global $idh_last_date_header;
   
-  // Get the current date:
-  $date = get_the_date( 'Y' );
+  // Get the current date:  
+  if ($year) {
+    $date = $year;
+  } else { 
+    $date = get_the_date( 'Y' );
+  }
   
   if($date<1800){
     $date = substr($date,0,-2)+1 . "th century";
   }else{
-    $date = substr($date,0,-1) . "0's";
+    $date = substr($date,0,-1) . "0s";
   }
   
   // Crop & Construct
   $date_header .= '<div class="content" id=' . str_replace(array(" ", "'"), "", $date) . ' name="' . $date . '">
-                     <h2 class="post the-year"><span>' . 
+                     <h2 class="the-year"><span>' . 
                      $date . 
                      '</span></h2>';
                      

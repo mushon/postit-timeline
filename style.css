@@ -18,6 +18,22 @@ Tags: Timeline, notes
 @import url('../twentyeleven/style.css');
 
 
+
+/* Custom Fonts
+-------------------------------------------------- */
+@font-face{
+  font-family: "league gothic";
+  src: url('assets/webfonts/League_Gothic-webfont.eot');
+  src: url('assets/webfonts/League_Gothic-webfont.ttf') format('ttf');
+  src: url('assets/webfonts/League_Gothic-webfont.svg#League_Gothic-webfont') format('svg');
+  src: url('assets/webfonts/League_Gothic-webfont.woff') format('woff');
+  font-weight:400;
+}
+
+/* Import default styles from the Timeline theme: */
+@import url('../twentyeleven/style.css');
+
+
 /* Hide stuff
 ------------------------- */
 /*hide major elements*/
@@ -43,6 +59,8 @@ iframe#siteHeader{
 iframe#siteFooter{
   width: 100%;
   height: 185px;
+  position: absolute;
+  z-index: 999;
   overflow: hidden;
   -webkit-box-shadow: 0 0 20px #CCCCCC;
      -moz-box-shadow: 0 0 20px #CCCCCC;
@@ -53,8 +71,10 @@ iframe#siteFooter{
 -------------------------------------------------- */
 
 body{
-  background: url(assets/concrete_wall_2.png) center 0;
-  /* background: url(assets/wood_pattern.png); */
+  /* background: url(assets/purty_wood.png) center 0; */
+  /* background: url(assets/concrete_wall_2.png) center 0; */
+  /* background: url(assets/wood_pattern.png) center 0; */
+  background: url(assets/bark3b.jpg) center 0;
   font-size: 16px;
   padding: 0;
 }
@@ -67,6 +87,7 @@ body, input, textarea {
 a {
     color: inherit;
     text-decoration: underline;
+    font-weight: bold;
 }
 
 #page{
@@ -99,22 +120,25 @@ article.tag-sml h1.entry-title{
 -------------------------------------------------- */
 
 #branding,
-#add{
+.page #main{
   max-width: 740px;
-  margin: 60px auto 10px;
-  padding: 50px 50px 40px;
+  margin: 0px auto 10px;
+  padding: 15px 50px 0;
   text-align: center;
+  border: 0;
+/*
   border-top: 2px solid #ccc;
   border-left: 2px solid #ccc;
   border-right: 2px solid #fff;
   border-bottom: 2px solid #fff;
-  background: rgba(50,50,50,0.03);
+  background: #fffff3;
+*/
   color: #37241C;
   z-index: 0;
 }
 
-#add{
-  margin-bottom: 100px;
+.page #main #primary{
+  float: none;
 }
 
 #branding hgroup{
@@ -122,26 +146,78 @@ article.tag-sml h1.entry-title{
   padding: 0;
 }
 
+#branding img{
+  width: auto;
+}
+
 #site-title{
   margin-right: 0;
   padding: 0;
 }
+
+a.back{
+  overflow: hidden;
+  display: block;
+  width: 102px; height: 102px;
+  background: url(assets/back.png);
+  text-indent: -200%;
+}
+
+
 #site-title a,
-#add h2 {
+.page #main h1 {
   color: #37241C;
-  font-family: brandon-grotesque-n5,brandon-grotesque,sans-serif;
-  font-size: 48px;
-  text-shadow: rgba(255,255,255,0.7) -1px -1px 0, rgba(100,100,100,0.5) 1px 1px 0;
+  font-family: "league gothic", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 40px;
+  text-shadow: 0px 0px 11px rgba(255,255,255,0.4);
   font-style: normal;
-  font-weight: 500;
+  display: none;
 }
 
 #site-title a:hover, #site-title a:focus, #site-title a:active {
     color: #a73415;
 }
 
+#site-description{
+  margin: 0;
+  font-size: 25px;
+  text-shadow: 0px 0px 11px rgba(255,255,255,0.4);
+  color: #37241C;
+  font-family: "league gothic", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  display: none;
+}
+
 #about{
   margin: 20px 0 -10px;
+  display: none;
+}
+
+.home #about{
+  display: block;
+  background: #F7F6F2;
+  margin: 0 140px;
+  padding: 10px 10px 0;
+}
+
+#about p {
+  padding: 2px 5px;
+}
+
+#about a{
+  background: #8CC63F;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 10px 5px;
+  text-decoration: none;
+}
+
+#about a:hover{
+  background: #39B54A;
 }
 
 /* Post
@@ -183,8 +259,11 @@ div.box:last-child{
   margin-bottom: 20px !important;
 }
 
+/* #branding, */
 h2.the-year span,
-.hentry:after {
+a.submit,
+.post:after,
+.page #main {
   border: 1px solid rgba(254, 254, 254, .3);
   background: rgba(254, 254, 254, .6);
   -webkit-box-shadow: 0px 0 3px rgba(0,0,0,0.1);
@@ -193,7 +272,8 @@ h2.the-year span,
 }
 
 h2.the-year span,
-.hentry:after {
+a.submit,
+.home .post:after {
   display: block;
   content: "";
   position: absolute; 
@@ -203,7 +283,8 @@ h2.the-year span,
   left: 33%; 
 }
 
-h2.the-year span{
+h2.the-year span,
+a.submit{
   display: inline;
   text-align: center;
   padding: 0 50px;
@@ -218,10 +299,23 @@ h2.the-year span{
 }
 
 h2.the-year {
-  margin: 40px auto;
+  margin: 60px auto;
 }
 
-article{
+a.submit{
+  font-size: 16px;
+  left: 0;
+  padding: 5px;
+  position: fixed;
+  text-decoration: none;
+  top: 190px;
+}
+
+a.submit:hover{
+  padding-left: 15px;
+}
+
+article.post{
   background-color: #37a9f2;
   border-color: #DEE184;
   -webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.25);
@@ -258,7 +352,7 @@ div.box footer.entry-meta{
   right: 0;
 }
 
-.entry-header .entry-meta{
+.post .entry-header .entry-meta{
   padding: 0;
   width: 100%;  
   position: absolute;
@@ -275,19 +369,19 @@ div.box footer.entry-meta{
   display: none;
 }
 
-article.category-actors{
-  background: rgb(177, 234, 0);
-}
-
-article.category-events{
+article.category-groupsindividuals{
   background: rgb(249, 82, 0);
 }
 
-article.category-ideas{
+article.category-ega{
+  background: rgb(177, 234, 0);
+}
+
+article.category-big-ideas{
   background: #F4F39E;
 }
 
-article h1.entry-title {
+article.post h1 {
   text-align: center;
   padding: 5px;
   font-family: 'Permanent Marker','Handlee', Chalkboard, sans-serif;
@@ -301,26 +395,17 @@ article h1.entry-title {
   color: inherit;
 }
 
-.entry-title, .entry-title a {
+.post .entry-title, .post .entry-title a {
   color: #222;
 }
 
-.entry-content, .entry-summary{
+.post .entry-content, .post .entry-summary{
   text-align: center;
   padding: 1em;
   overflow: auto;
   max-height: 355px;
   display: none;
   height: 100%;
-}
-
-.singular #content article{
-  position: relative;
-  margin: 30px auto;
-  top: auto; left: auto;
-  width: 600px; height: auto; 
-  overflow: visible;
-  min-height: 600px;
 }
 
 .singular #content .entry-content, 
@@ -344,31 +429,28 @@ form,
 }
 
 .fm-form li:first-child input{
-  width: 99%;
-  font-size: 25px;
+    font-size: 20px;
+    width: 95%;
 }
 
-.fm-form input{
+form.fm-form input{
   margin: 0;
+  padding: 3px 8px;
 }
 
 form.fm-form input.submit {
     display: block;
     float: none;
     font-size: 20px;
-    margin: 50px 0 30px 240px;
-    width: 60%;
-}
-
-form.fm-form textarea {
-    width: 440px;
+    margin: 50px 0 30px 204px;
+    width: 66%;
 }
 
 /* Nav
 -------------------------------------------------- */
 ul#nav{
   position: fixed;
-  top: 200px;
+  top: 230px;
   left: 0px;
   list-style: none;
   margin: 0;
@@ -399,6 +481,14 @@ ul#nav a[href="#17thcentury"]
 {
   width: 70px;
 }
+
+/*
+ul#nav a[href="#2010s"]
+{
+  width: 70px;
+}
+*/
+
 
 ul#nav a span{
   display: none;
@@ -445,14 +535,18 @@ ul#nav a:hover{
   display: block;
 }
 
-.page #content,
 div.box.flip{
   z-index: 1000;
   margin-top: -70px;
+  transition: all 0s;
 }
 
-.singular #content article,
-div.box.flip article{
+div.box.top{
+  z-index: 1000;
+}
+
+div.box.flip article,
+.single-post article.post{
   position: fixed;
   top: 50%; left: 50%;
   margin: -225px 0 0 -225px;
@@ -465,7 +559,6 @@ div.box.flip article{
   overflow: hidden;
 }
 
-.singular #content article:after,
 div.box.flip article:after {
   width: 180px;
   height: 60px;
@@ -477,55 +570,82 @@ div.box.flip article:after{
   display: none;
 }
 
-.singular #content .entry-content,
-div.box.flip .entry-content
+div.box.flip .entry-content,
+.single-post .entry-content
 {
   display: block;
 }
 
-.hentry {
+.post {
 	margin: 0; padding: 0;
 	float: none;
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 900;
+	z-index: 2000;
 	
   font-size: 8px;
 
 	/* -- transition is the magic sauce for animation -- */
-	-o-transition: all .3s ease-out;
-	-ms-transition: all .3s ease-out;
-	-moz-transition: all .3s ease-out;
+	-o-transition: .3s ease-out;
+	-ms-transition: .3s ease-out;
+	-moz-transition: .3s ease-out;
 	-webkit-transition: all .3s ease-out;
 	transition: all .3s ease-out;
+	
+	-o-transition-property: height, width, margin, padding, top, left;
+	-ms-transition-property: height, width, margin, padding, top, left;
+	-moz-transition-property: height, width, margin, padding, top, left;
+	-webkit-transition-property: height, width, margin, padding, top, left;
+	transition-property: height, width, margin, padding, top, left;
 	
 	cursor: pointer;
 }
 
-.hentry header{
+.home .post header{
   min-height: 100%;
 }
 
-.flip .hentry header{
+.flip .post header,
+.single-post .post heaser{
   min-height: 0;
 }
 
 /* Singular
 -------------------------------------------------- */
 
-.singular #content article{
-  position: relative;
-  left: auto; top: auto;
-  margin: 30px auto;
-  height: auto;   width: 550px;
-  overflow: visible;
+.page #content article header,
+.page .entry-content{
+  min-height: 0;
+  width: 100%;
 }
 
-.singular #content article header{
-  min-height: 0;
+.single-post article.post .entry-content{
+  display: block;
+  width: auto;
+}
+
+.single-post article.post{
+  left: auto; right: auto;
+  position: relative;
+  margin: 30px auto 100px;
+  font-family: 'Handlee',Chalkboard,sans-serif;
+}
+
+.single-post .entry-meta{
+  display: none;
 }
 
 .singular #nav{
   display: none;
 }
+
+.back{
+  max-width: 840px;
+  margin: 30px auto;
+}
+
+
+.ieWarning { max-width: 740px; border: 1px solid; margin: 10px auto; padding:15px 10px; color: #9F6000; background-color: #FEEFB3; }
+	.ieWarning p { margin: 0; padding: 0; }
+	.ieWarning a { color: #9F6000; }
