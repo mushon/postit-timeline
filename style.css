@@ -275,7 +275,7 @@ div.box footer.entry-meta{
   display: none;
 }
 
-article.category-actors{
+article.category-individuals-or-groups{
   background: rgb(177, 234, 0);
 }
 
@@ -283,7 +283,7 @@ article.category-events{
   background: rgb(249, 82, 0);
 }
 
-article.category-ideas{
+article.category-big-ideas{
   background: #F4F39E;
 }
 
@@ -445,14 +445,18 @@ ul#nav a:hover{
   display: block;
 }
 
-.page #content,
 div.box.flip{
   z-index: 1000;
   margin-top: -70px;
+  transition: all 0s;
 }
 
-.singular #content article,
-div.box.flip article{
+div.box.top{
+  z-index: 1000;
+}
+
+div.box.flip article,
+.single-post article.post{
   position: fixed;
   top: 50%; left: 50%;
   margin: -225px 0 0 -225px;
@@ -465,7 +469,6 @@ div.box.flip article{
   overflow: hidden;
 }
 
-.singular #content article:after,
 div.box.flip article:after {
   width: 180px;
   height: 60px;
@@ -477,37 +480,44 @@ div.box.flip article:after{
   display: none;
 }
 
-.singular #content .entry-content,
-div.box.flip .entry-content
+div.box.flip .entry-content,
+.single-post .entry-content
 {
   display: block;
 }
 
-.hentry {
+.post {
 	margin: 0; padding: 0;
 	float: none;
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 900;
-	
+	z-index: 2000;
+
   font-size: 8px;
 
 	/* -- transition is the magic sauce for animation -- */
-	-o-transition: all .3s ease-out;
-	-ms-transition: all .3s ease-out;
-	-moz-transition: all .3s ease-out;
+	-o-transition: .3s ease-out;
+	-ms-transition: .3s ease-out;
+	-moz-transition: .3s ease-out;
 	-webkit-transition: all .3s ease-out;
 	transition: all .3s ease-out;
-	
+
+	-o-transition-property: height, width, margin, padding, top, left;
+	-ms-transition-property: height, width, margin, padding, top, left;
+	-moz-transition-property: height, width, margin, padding, top, left;
+	-webkit-transition-property: height, width, margin, padding, top, left;
+	transition-property: height, width, margin, padding, top, left;
+
 	cursor: pointer;
 }
 
-.hentry header{
+.home .post header{
   min-height: 100%;
 }
 
-.flip .hentry header{
+.flip .post header,
+.single-post .post heaser{
   min-height: 0;
 }
 
