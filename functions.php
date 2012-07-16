@@ -9,14 +9,27 @@
 
 function arabella_footer ($content){
   
+/*
   $page_data = get_page_by_path( 'add' );
-  $form = '<h2>' . apply_filters('the_content', $page_data->post_title) . '</h2>';  
-  $form .= apply_filters('the_content', $page_data->post_content);
-  echo '</div>
+  if (is_home()){
+    $form = '<section id="add"';
+    //$form .= '><h2>' . apply_filters('the_content', $page_data->post_title) . '</h2>';  
+    //$form .= apply_filters('the_content', $page_data->post_content);
+    
+    $form .= echo do_shortcode('[form add]');
+    $form .= '</section>';
+  } else{
+    $form ='';
+  }
+*/
+  $footer = '</div>
   </div>
-  <section id="add">' . $form . '</section>
-    <iframe id="siteFooter" src="http://www.arabellaadvisors.com/static-footer/"></iframe>
-  <div>' . $content;
+    ';
+  //$footer .= $form;
+  $footer .= '<iframe id="siteFooter" src="http://www.arabellaadvisors.com/static-footer/"></iframe>
+  <div>';
+  $footer .=$content;
+  echo $footer;
 }
 
 add_filter('get_footer','arabella_footer');
@@ -66,10 +79,12 @@ function headjs(){
     });
     
     
-/* One Page Nav
+/* Single Page Nav
   ***************************************************/
   
-    jQuery('#page').append(jQuery('<ul id="nav" class="internal"><li><h3>now</h3></li></ul>'));
+    jQuery('body.singular #page').append(jQuery('<a class="submit" href="<?php bloginfo('siteurl') //the "home" page ?>">Back</a>'));
+  
+    jQuery('body.home #page').append(jQuery('<a class="submit" href="<?php echo get_page_link(2) //the "add" page ?>">Submit</a> <ul id="nav" class="internal"><li><h3>now</h3></li></ul>'));
     
     jQuery("div.content").each(function() {
       var navItem = '<li><a href="#' + jQuery(this).attr("id") + '"><span>' + jQuery(this).attr("name") + '</span></a></li>';
@@ -139,12 +154,12 @@ function intermittent_date_header( $d='', $before='', $after='', $echo = true, $
   if($date<1800){
     $date = substr($date,0,-2)+1 . "th century";
   }else{
-    $date = substr($date,0,-1) . "0's";
+    $date = substr($date,0,-1) . "0s";
   }
   
   // Crop & Construct
   $date_header .= '<div class="content" id=' . str_replace(array(" ", "'"), "", $date) . ' name="' . $date . '">
-                     <h2 class="post the-year"><span>' . 
+                     <h2 class="the-year"><span>' . 
                      $date . 
                      '</span></h2>';
                      
